@@ -1,0 +1,31 @@
+services:
+  # The AI Brain: Ollama runs NATIVELY on macOS for full M4 Pro GPU acceleration.
+  # Start it with: ollama serve
+  # (Install with: brew install ollama)
+
+  # The AI Agent: OpenClaw handles the tools (Git, Filesystem, Terminal)
+  openclaw:
+    image: ghcr.io/openclaw/openclaw:latest
+    container_name: openclaw-gateway
+    environment:
+      - OLLAMA_HOST=http://host.docker.internal:11434
+      - OPENCLAW_STATE_DIR=/home/node/.openclaw
+      - OPENCLAW_CONFIG_PATH=/home/node/.openclaw/openclaw.json
+      - OPENCLAW_CONFIG_DIR=/home/node/.openclaw
+      - OPENCLAW_WORKSPACE_DIR=/home/node/.openclaw/workspace
+      # AWS Bedrock — uses named profile from ~/.aws/credentials
+      - AWS_PROFILE=${AWS_PROFILE}
+      - AWS_REGION=${AWS_REGION:-ap-northeast-1}
+    volumes:
+      - ./openclaw_data:/home/node/.openclaw
+      # Mount your local SSH keys so the AI can push to GitHub for you
+      - ~/.ssh:/root/.ssh:ro
+      # Mount AWS credentials so the container can use the named profile
+      - ~/.aws:/home/node/.aws:ro
+    ports:
+      - "18789:18789"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    init: true
+    restart: unless-stopped
+    command: ["node", "dist/index.js", "gateway", "--bind", "lan", "--port", "18789", "--allow-unconfigured"]

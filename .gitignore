@@ -1,0 +1,24 @@
+# Secrets
+.env
+.env.*
+
+# Ollama model cache/data (large binaries)
+ollama_data/
+
+# OpenClaw runtime state and local auth/session data
+openclaw_data/
+
+# Logs and temp files
+*.log
+*.tmp
+*.bak
+*.bak*
+*.orig
+*.rej
+*~
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/

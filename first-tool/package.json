@@ -1,0 +1,40 @@
+{
+  "name": "first-tool",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "description": "A standalone OpenClaw tools plugin written in TypeScript.",
+  "main": "dist/index.js",
+  "files": [
+    "dist/**",
+    "openclaw.plugin.json"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "check": "tsc -p tsconfig.json --noEmit",
+    "plugins:build": "openclaw plugins build --root . --entry ./src/index.ts",
+    "prepack": "npm run build && npm run plugins:build"
+  },
+  "dependencies": {
+    "openclaw": "2026.6.1",
+    "typebox": "1.2.2"
+  },
+  "devDependencies": {
+    "@types/node": "25.9.2",
+    "typescript": "6.0.3"
+  },
+  "peerDependencies": {
+    "openclaw": ">=2026.6.1"
+  },
+  "openclaw": {
+    "extensions": [
+      "./src/index.ts"
+    ],
+    "runtimeExtensions": [
+      "./dist/index.js"
+    ],
+    "compat": {
+      "pluginApi": ">=2026.6.1"
+    }
+  }
+}

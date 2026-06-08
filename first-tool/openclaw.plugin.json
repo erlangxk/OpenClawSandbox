@@ -1,0 +1,31 @@
+{
+  "id": "first-tool",
+  "name": "First Tool",
+  "description": "Example OpenClaw tools plugin.",
+  "activation": {
+    "onStartup": true
+  },
+  "configSchema": {
+    "type": "object",
+    "properties": {
+      "geocodingBaseUrl": {
+        "type": "string",
+        "description": "Override the Open-Meteo geocoding API base URL."
+      },
+      "forecastBaseUrl": {
+        "type": "string",
+        "description": "Override the Open-Meteo forecast API base URL."
+      },
+      "language": {
+        "type": "string",
+        "description": "Language used for geocoding lookup results. Defaults to en."
+      }
+    }
+  },
+  "version": "0.1.0",
+  "contracts": {
+    "tools": [
+      "weather_current"
+    ]
+  }
+}

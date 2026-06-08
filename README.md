@@ -9,6 +9,7 @@ ollama --version
 ## Start Ollama with this project's existing model directory
 ```bash
 export OLLAMA_MODELS=/Users/simonking/OpenClawSandbox/ollama_data/models
+
 ollama serve
 ```
 

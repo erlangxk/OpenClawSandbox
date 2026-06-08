@@ -22,3 +22,5 @@ openclaw_data/
 
 # Editor
 .vscode/
+
+node_modules/

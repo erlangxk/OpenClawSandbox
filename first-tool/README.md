@@ -86,6 +86,15 @@ Use these if you run OpenClaw in container openclaw-gateway:
 4. Refresh plugin registry:
    docker exec openclaw-gateway node dist/index.js plugins registry --refresh
 
+### Optional but recommended: pin plugin trust
+
+If logs mention untracked local code or plugins.allow is empty, explicitly trust this plugin id.
+
+1. Add first-tool to plugins.allow:
+   docker exec openclaw-gateway node dist/index.js config set plugins.allow '["first-tool"]'
+2. Refresh plugin registry:
+   docker exec openclaw-gateway node dist/index.js plugins registry --refresh
+
 ## How to test in chat
 
 Ask the agent to call weather_current with a city name, for example:
